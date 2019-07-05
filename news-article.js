@@ -3,6 +3,7 @@ class NewsArticle extends HTMLElement {
     super();
     this.root = this.attachShadow({ mode: 'open' });
   }
+
   set article(article) {
     this.root.innerHTML = `
           <style>
@@ -25,6 +26,14 @@ class NewsArticle extends HTMLElement {
             <img src="${article.urlToImage ? article.urlToImage : ''}">
             <p>${article.description}</p>
           </a>`;
+  }
+
+  set nested(el) {
+    let aNode = Array.from(this.root.childNodes).find((node) => {
+      return node.nodeName === 'A';
+    });
+
+    aNode.appendChild(el);
   }
 }
 

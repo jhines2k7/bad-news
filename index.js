@@ -1,4 +1,5 @@
 import './news-article.js';
+import './custom-nested.js';
 import { topHeadlinesUrl } from './newsApi.js';
 
 window.addEventListener('load', () => {
@@ -12,9 +13,17 @@ async function getNews() {
 
   const main = document.querySelector('main');
 
+  let i = 0;
+
   json.articles.forEach(article => {
     const el = document.createElement('news-article');
     el.article = article;
+
+    const customNested = document.createElement('custom-nested');
+    customNested.number = i++;
+
+    el.nested = customNested;
+
     main.appendChild(el);
   });
 }
